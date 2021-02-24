@@ -8,6 +8,51 @@ import '../scss/main.scss';
 
 console.log('HELLO 🚀');
 
+const start = document.querySelector('button.main');
+const reset = document.querySelector('button.reset');
+const counter = document.querySelector('.time div');
+
+
+let number = 0;
+let active = false;
+let idInteval;
+
+const clock = () => {
+    number++
+    // const seconds = Math.floor(number /100  );
+    // const miliSeconds = Math.floor(number % 100);
+    // counter.textContent = `${seconds < 10 ? '0'+ seconds : seconds}.${miliSeconds < 10 ? '0'+ miliSeconds: miliSeconds}`;
+
+    counter.textContent = (number / 100).toFixed(2);
+}
+
+const startClock = () => {
+    if (!active) {
+        active = !active;
+        start.textContent = 'Pause';
+        idInteval = setInterval(clock, 10);
+    } else {
+        active = !active;
+        start.textContent = 'Start';
+        clearInterval(idInteval);
+    }
+}
+
+const resetClock = () => {
+
+    clearInterval(idInteval);
+    active = false;
+    number = 0;
+    counter.textContent = '---';
+    start.textContent = 'Start';
+
+}
+
+start.addEventListener('click', startClock);
+reset.addEventListener('click', resetClock);
+
+
+
 
 
 
